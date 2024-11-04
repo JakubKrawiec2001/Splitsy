@@ -1,12 +1,16 @@
-import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  return (
-    <div>
-      Splitsy Main Dashboard
-      <Button>Click me</Button>
-    </div>
-  );
+  const navigate = useNavigate();
+  const user = false;
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/sign-in");
+    }
+  }, [user, navigate]);
+  return <div>Splitsy Main Dashboard</div>;
 };
 
 export default Home;
