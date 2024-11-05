@@ -15,6 +15,11 @@ export default {
         customGray: "#F8F9FB",
         customTextColor: "#7A7F94",
       },
+      screens: {
+        xs: "375px",
+        sm: "400px",
+        "2lg": "1100px",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

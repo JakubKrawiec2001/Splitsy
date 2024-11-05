@@ -35,7 +35,7 @@ const Auth = ({ type }: { type: string }) => {
     await onSubmit(form.getValues());
   };
   return (
-    <div className="w-[450px]">
+    <div className="w-full md:w-[70%] lg:w-[90%] 2lg:w-[450px]">
       <div className="flex items-center gap-2">
         <img src={logo} alt="Splitsy" className="w-[50px]" />
         <h1 className="text-lg md:text-3xl font-bold">Splitsy</h1>
@@ -83,7 +83,7 @@ const Auth = ({ type }: { type: string }) => {
           <div className="flex flex-col items-center gap-4">
             <Button
               type="submit"
-              className="cyan_bg_gradient text-white w-full text-lg md:py-6 rounded-[5px]"
+              className="cyan_bg_gradient text-white w-full text-lg xs:py-6 rounded-[5px]"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -108,7 +108,7 @@ const Auth = ({ type }: { type: string }) => {
                 <Button
                   type="button"
                   onClick={handleGuestLogin}
-                  className="bg-customBlack text-white w-full text-lg md:py-6 rounded-[5px] hover:bg-customCyan hover:text-customBlack transition-colors"
+                  className="bg-customBlack text-white w-full text-lg xs:py-6  rounded-[5px] hover:bg-customCyan hover:text-customBlack transition-colors"
                   disabled={isLoading}
                 >
                   {isLoading ? (
