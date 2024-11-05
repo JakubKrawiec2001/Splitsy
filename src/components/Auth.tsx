@@ -10,7 +10,10 @@ import { useState } from "react";
 import logo from "../assets/icons/logo-splitsy.png";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth, db } from "@/config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -32,21 +35,26 @@ const Auth = ({ type }: { type: string }) => {
   const onSubmit = async (data: z.infer<typeof authSchema>) => {
     setIsLoading(true);
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      await setDoc(doc(db, "users", response.user.uid), {
-        username: data.username,
-        email: data.email,
-        id: response.user.uid,
-        avatar: "This will be avatar url",
-        group: "This will be user's group",
-        incomes: 0,
-        expenses: 0,
-      });
+      if (type === "sign-up") {
+        const response = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+        await setDoc(doc(db, "users", response.user.uid), {
+          username: data.username,
+          email: data.email,
+          id: response.user.uid,
+          avatar: "This will be avatar url",
+          group: "This will be user's group",
+          incomes: 0,
+          expenses: 0,
+        });
+      }
 
+      if (type === "sign-in") {
+        await signInWithEmailAndPassword(auth, data.email, data.password);
+      }
       navigate("/");
 
       toast({
