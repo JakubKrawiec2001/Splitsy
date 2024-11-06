@@ -19,13 +19,13 @@ body {
   background-image: radial-gradient(
     140% 107% at 50% 10%,
     #000314 37.41%,
-    #0FE6DC 69.27%,
+    #0fe6dc 69.27%,
     #ffffff 100%
   );
 }
 
 @layer utilities {
-  .auth_wrapper {
+  .wrapper {
     @apply mx-auto w-full max-w-[2600px];
   }
   .cyan_bg_gradient {

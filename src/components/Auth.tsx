@@ -16,11 +16,12 @@ import {
 } from "firebase/auth";
 import { auth, db } from "@/config/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import AvatarSelection from "./AvatarSelection";
 
 const Auth = ({ type }: { type: string }) => {
   const authSchema = formSchema(type);
-  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedAvatar, setSelectedAvatar] = useState("");
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ const Auth = ({ type }: { type: string }) => {
           username: data.username,
           email: data.email,
           id: response.user.uid,
-          avatar: "This will be avatar url",
+          avatar: selectedAvatar,
           group: "This will be user's group",
           incomes: 0,
           expenses: 0,
@@ -84,6 +85,9 @@ const Auth = ({ type }: { type: string }) => {
         {type === "sign-in" ? "Welcome Back" : "Get Started"}
       </p>
       <p className="text-customTextColor">Let's manage your finance</p>
+      {type === "sign-up" && (
+        <AvatarSelection props={{ selectedAvatar, setSelectedAvatar }} />
+      )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
