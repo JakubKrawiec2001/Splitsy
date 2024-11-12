@@ -47,7 +47,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 items-center justify-center bg-blue-500 size-full">
+    <div className="flex flex-col gap-6 items-center justify-center size-full">
       <div className="size-full">
         Splitsy Main Dashboard: {user?.email}{" "}
         <img src={userData?.avatar} alt="" className="size-[100px]" />
