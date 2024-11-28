@@ -8,7 +8,6 @@ import avatar7 from "../assets/images/avatars/avatar-7.png";
 import avatar8 from "../assets/images/avatars/avatar-8.png";
 import avatar9 from "../assets/images/avatars/avatar-9.png";
 
-import { RiHome6Fill } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
 import { IoIosCard } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";

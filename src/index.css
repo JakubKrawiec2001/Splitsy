@@ -23,6 +23,22 @@ body {
     #ffffff 100%
   );
 }
+.notification_bell {
+  position: relative;
+}
+
+.notification_bell::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  background-color: #f5518b;
+  border: 1px solid #f06496;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  z-index: 1;
+}
 
 @layer utilities {
   .wrapper {
