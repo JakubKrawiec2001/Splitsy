@@ -26,3 +26,37 @@ export const formSchema = (type: string) =>
         path: ["confirmedPassword"],
       }
     );
+
+export const expenseSchema = z.object({
+  transactionType: z.enum(["expense", "revenue"], {
+    message: `Select type of transaction`,
+  }),
+  amount: z
+    .number({ invalid_type_error: "The amount must be a number" })
+    .min(1, "The amount must be greater than 0"),
+  description: z
+    .string()
+    .min(1, { message: "Add a description of the expense" }),
+  category: z.enum(
+    [
+      "Health",
+      "Leisure",
+      "Home",
+      "Cafe",
+      "Education",
+      "Gifts",
+      "Groceries",
+      "Family",
+      "Workout",
+      "Transportation",
+      "Work",
+      "Restaurants",
+      "Other",
+    ],
+    { message: `Select or add a category` }
+  ),
+  color: z
+    .string()
+    .regex(/^#[0-9A-F]{6}$/i, "Invalid color format")
+    .min(1, "Select a category color"),
+});

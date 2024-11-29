@@ -83,3 +83,19 @@ export const navLinks = [
     path: "/my-wallet",
   },
 ];
+
+export const categories = [
+  "Health",
+  "Leisure",
+  "Home",
+  "Cafe",
+  "Education",
+  "Gifts",
+  "Groceries",
+  "Family",
+  "Workout",
+  "Transportation",
+  "Work",
+  "Restaurants",
+  "Other",
+];

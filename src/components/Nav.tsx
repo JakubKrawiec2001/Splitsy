@@ -1,20 +1,7 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  IoIosSettings,
-  IoIosCard,
-  IoMdNotificationsOutline,
-} from "react-icons/io";
-import { FaUserGroup } from "react-icons/fa6";
-import { FaWallet } from "react-icons/fa";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { useUser } from "@/hooks/useUser";
+import AddTransactions from "./AddTransactions";
+import AvatarMenu from "./AvatarMenu";
 
 const Nav = () => {
   const { userData } = useUser();
@@ -29,38 +16,11 @@ const Nav = () => {
         </p>
       </div>
       <div className="flex items-center gap-4">
+        <AddTransactions />
         <div className="notification_bell">
           <IoMdNotificationsOutline className="text-[2.6rem] text-customTextColor hover:bg-customGray rounded-full p-1 cursor-pointer" />
         </div>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage src={userData?.avatar} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="bottom" align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <IoIosCard />
-              Transactions
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <FaUserGroup />
-              Groups
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <FaWallet />
-              Manage wallets
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <IoIosSettings />
-              Account settings
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <AvatarMenu userAvatar={userData?.avatar} />
       </div>
     </nav>
   );

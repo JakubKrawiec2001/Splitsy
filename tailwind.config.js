@@ -13,7 +13,9 @@ export default {
         customCyan: "#0FE6DC",
         customBlack: "#26272F",
         customGray: "#F8F9FB",
+        customDarkGray: "#F4F4F4",
         customTextColor: "#7A7F94",
+        customBlackHover: "#595c6d",
       },
       screens: {
         xs: "375px",
