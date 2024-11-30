@@ -3,7 +3,7 @@ import { TransactionType } from "@/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addDoc, collection } from "firebase/firestore";
 
-const addTransaction = async (data: TransactionType) => {
+const addRevenue = async (data: TransactionType) => {
   const {
     username,
     userID,
@@ -14,7 +14,7 @@ const addTransaction = async (data: TransactionType) => {
     transactionType,
   } = data;
   try {
-    await addDoc(collection(db, "expenses"), {
+    await addDoc(collection(db, "revenues"), {
       transactionType,
       username,
       userID,
@@ -28,10 +28,10 @@ const addTransaction = async (data: TransactionType) => {
   }
 };
 
-export const useAddTransaction = () => {
+export const useAddRevenues = () => {
   //   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: TransactionType) => addTransaction(data),
+    mutationFn: (data: TransactionType) => addRevenue(data),
   });
 };

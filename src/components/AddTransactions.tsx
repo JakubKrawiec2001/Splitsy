@@ -29,16 +29,18 @@ import {
 } from "@/components/ui/dialog";
 import { FaPlus } from "react-icons/fa6";
 import { categories } from "@/constansts";
-import { useAddTransaction } from "@/hooks/useAddTransaction";
+import { useAddExpenses } from "@/hooks/useAddExpenses";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { useAddRevenues } from "@/hooks/useAddRevenues";
 
 const AddTransactions = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const { userData } = useUser();
   const { toast } = useToast();
-  const addTransaction = useAddTransaction();
+  const addExpense = useAddExpenses();
+  const addRevenue = useAddRevenues();
 
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
@@ -58,21 +60,39 @@ const AddTransactions = () => {
       category: data.category,
       color: data.color,
     };
+    if (data.transactionType === "expense") {
+      addExpense.mutate(transactionData, {
+        onSuccess: () => {
+          form.reset();
+          setIsOpenDialog((prev) => !prev);
+          toast({
+            variant: "default",
+            title: "Success",
+            description: "Successfully added transaction",
+          });
+        },
+        onError: (error) => {
+          console.error("Transaction Error: ", error);
+        },
+      });
+    }
 
-    addTransaction.mutate(transactionData, {
-      onSuccess: () => {
-        form.reset();
-        setIsOpenDialog((prev) => !prev);
-        toast({
-          variant: "default",
-          title: "Success",
-          description: "Successfully added transactions",
-        });
-      },
-      onError: (error) => {
-        console.error("Transaction Error: ", error);
-      },
-    });
+    if (data.transactionType === "revenue") {
+      addRevenue.mutate(transactionData, {
+        onSuccess: () => {
+          form.reset();
+          setIsOpenDialog((prev) => !prev);
+          toast({
+            variant: "default",
+            title: "Success",
+            description: "Successfully added transaction",
+          });
+        },
+        onError: (error) => {
+          console.error("Transaction Error: ", error);
+        },
+      });
+    }
   };
   return (
     <>
@@ -226,9 +246,9 @@ const AddTransactions = () => {
                     <Button
                       type="submit"
                       className="cyan_bg_gradient text-white w-full text-lg xs:py-6 rounded-[5px]"
-                      disabled={addTransaction.isPending}
+                      disabled={addExpense.isPending}
                     >
-                      {addTransaction.isPending ? (
+                      {addExpense.isPending ? (
                         <span className="flex items-center gap-2">
                           <Loader2 size={20} className="animate-spin" />
                           Loading...
