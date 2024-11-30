@@ -12,6 +12,7 @@ const addRevenue = async (data: TransactionType) => {
     category,
     color,
     transactionType,
+    createdAt,
   } = data;
   try {
     await addDoc(collection(db, "revenues"), {
@@ -22,6 +23,7 @@ const addRevenue = async (data: TransactionType) => {
       description,
       category,
       color,
+      createdAt,
     });
   } catch (error) {
     console.log(error);

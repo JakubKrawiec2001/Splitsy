@@ -34,6 +34,7 @@ import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useAddRevenues } from "@/hooks/useAddRevenues";
+import { serverTimestamp } from "firebase/firestore";
 
 const AddTransactions = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
@@ -59,6 +60,7 @@ const AddTransactions = () => {
       description: data.description,
       category: data.category,
       color: data.color,
+      createdAt: serverTimestamp(),
     };
     if (data.transactionType === "expense") {
       addExpense.mutate(transactionData, {
@@ -94,6 +96,7 @@ const AddTransactions = () => {
       });
     }
   };
+
   return (
     <>
       <Dialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
@@ -246,9 +249,9 @@ const AddTransactions = () => {
                     <Button
                       type="submit"
                       className="cyan_bg_gradient text-white w-full text-lg xs:py-6 rounded-[5px]"
-                      disabled={addExpense.isPending}
+                      disabled={addExpense.isPending || addRevenue.isPending}
                     >
-                      {addExpense.isPending ? (
+                      {addExpense.isPending || addRevenue.isPending ? (
                         <span className="flex items-center gap-2">
                           <Loader2 size={20} className="animate-spin" />
                           Loading...

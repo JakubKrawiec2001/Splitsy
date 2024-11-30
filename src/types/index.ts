@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { DocumentData } from "firebase/firestore";
+import { DocumentData, FieldValue } from "firebase/firestore";
 
 export type UserType = {
   email: string;
@@ -26,4 +26,5 @@ export type TransactionType = {
   category: string;
   color: string;
   transactionType: string;
+  createdAt: FieldValue;
 };
