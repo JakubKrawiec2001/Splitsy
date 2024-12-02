@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { expenseSchema } from "@/utils/schemas";
 import { useUser } from "@/hooks/useUser";
@@ -28,7 +28,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaPlus } from "react-icons/fa6";
-import { categories } from "@/constansts";
+import { categories, iconList } from "@/constansts";
 import { useAddExpenses } from "@/hooks/useAddExpenses";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -42,6 +42,7 @@ const AddTransactions = () => {
   const { toast } = useToast();
   const addExpense = useAddExpenses(userData?.id);
   const addRevenue = useAddRevenues(userData?.id);
+  const [color, setColor] = useState("#000000");
 
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
@@ -61,6 +62,7 @@ const AddTransactions = () => {
       category: data.category,
       color: data.color,
       createdAt: serverTimestamp(),
+      icon: data.icon,
     };
     if (data.transactionType === "expense") {
       addExpense.mutate(transactionData, {
@@ -97,6 +99,10 @@ const AddTransactions = () => {
     }
   };
 
+  const colorValue = useWatch({
+    control: form.control,
+    name: "color",
+  });
   return (
     <>
       <Dialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
@@ -226,6 +232,7 @@ const AddTransactions = () => {
                         </div>
                       )}
                     />
+
                     <FormField
                       control={form.control}
                       name="color"
@@ -237,14 +244,49 @@ const AddTransactions = () => {
                               type="color"
                               value={field.value}
                               onChange={field.onChange}
-                              className="h-12 w-[40%] bg-customBlack p-1 rounded-[5px] cursor-pointer"
+                              className="h-12 w-full bg-customBlack p-1 rounded-[5px] cursor-pointer"
                             />
                           </FormControl>
                           <FormMessage />
                         </div>
                       )}
                     />
+                    <FormField
+                      control={form.control}
+                      name="icon"
+                      render={({ field }) => (
+                        <div className="w-full">
+                          <FormLabel>Choose icon</FormLabel>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {iconList.map((icon) => {
+                              return (
+                                <div
+                                  key={icon.id}
+                                  className={`p-3 opacity-100 ${
+                                    field.value === icon.icon
+                                      ? "rounded-xl"
+                                      : "rounded-full hover:opacity-60 transition-opacity cursor-pointer"
+                                  }`}
+                                  style={{ backgroundColor: colorValue }}
+                                  onClick={() => {
+                                    field.onChange(icon.icon);
+                                  }}
+                                >
+                                  <img
+                                    src={icon.icon}
+                                    alt=""
+                                    className="w-[30px] invert-[1]"
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <FormMessage />
+                        </div>
+                      )}
+                    />
                   </div>
+
                   <div className="flex flex-col items-center gap-4">
                     <Button
                       type="submit"

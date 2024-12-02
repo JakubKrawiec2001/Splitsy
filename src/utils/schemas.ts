@@ -59,4 +59,5 @@ export const expenseSchema = z.object({
     .string()
     .regex(/^#[0-9A-F]{6}$/i, "Invalid color format")
     .min(1, "Select a category color"),
+  icon: z.string().min(1, { message: "You must select an icon" }),
 });

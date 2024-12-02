@@ -13,6 +13,7 @@ const addRevenue = async (data: TransactionType) => {
     color,
     transactionType,
     createdAt,
+    icon,
   } = data;
   try {
     await addDoc(collection(db, "revenues"), {
@@ -24,6 +25,7 @@ const addRevenue = async (data: TransactionType) => {
       category,
       color,
       createdAt,
+      icon,
     });
   } catch (error) {
     console.log(error);
@@ -36,7 +38,7 @@ export const useAddRevenues = (currentUserId: string) => {
   return useMutation({
     mutationFn: (data: TransactionType) => addRevenue(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["expenses", currentUserId] });
+      queryClient.invalidateQueries({ queryKey: ["revenues", currentUserId] });
     },
   });
 };
