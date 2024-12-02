@@ -30,10 +30,13 @@ const addRevenue = async (data: TransactionType) => {
   }
 };
 
-export const useAddRevenues = () => {
-  //   const queryClient = useQueryClient();
+export const useAddRevenues = (currentUserId: string) => {
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (data: TransactionType) => addRevenue(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["expenses", currentUserId] });
+    },
   });
 };
