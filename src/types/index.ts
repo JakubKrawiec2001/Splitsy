@@ -30,3 +30,12 @@ export type TransactionType = {
   id?: string;
   icon: string;
 };
+
+export type TransactionContextType = {
+  expenses: TransactionType[];
+  revenues: TransactionType[];
+  isExpensesLoading: boolean;
+  isRevenuesLoading: boolean;
+  totalRevenues: number;
+  totalExpenses: number;
+};

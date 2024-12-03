@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { expenseSchema } from "@/utils/schemas";
 import { useUser } from "@/hooks/useUser";
@@ -42,7 +42,6 @@ const AddTransactions = () => {
   const { toast } = useToast();
   const addExpense = useAddExpenses(userData?.id);
   const addRevenue = useAddRevenues(userData?.id);
-  const [color, setColor] = useState("#000000");
 
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),

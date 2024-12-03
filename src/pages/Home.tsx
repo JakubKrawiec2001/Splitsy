@@ -1,20 +1,23 @@
-import { useFetchCurrentUserExpenses } from "@/hooks/useFetchCurrentUserExpenses";
-import { useFetchCurrentUserRevenues } from "@/hooks/useFetchCurrentUserRevenues";
+import { TransactionContext } from "@/context/TransactionContext";
 import { useUser } from "@/hooks/useUser";
 import { Timestamp } from "firebase/firestore";
 import { Loader2 } from "lucide-react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
+// import { Doughnut } from "react-chartjs-2";
+// import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { user, userData } = useUser();
-  const { data: expenses, isPending: isExpensesLoading } =
-    useFetchCurrentUserExpenses(userData?.id);
-  const { data: revenues, isPending: isRevenuesLoading } =
-    useFetchCurrentUserRevenues(userData?.id);
+  const { user } = useUser();
+  const {
+    expenses,
+    revenues,
+    isExpensesLoading,
+    isRevenuesLoading,
+    totalExpenses,
+    totalRevenues,
+  } = useContext(TransactionContext);
 
   useEffect(() => {
     if (!user) {
@@ -22,37 +25,42 @@ const Home = () => {
     }
   }, [user, navigate]);
 
-  ChartJS.register(Tooltip, Legend, ArcElement);
+  // ChartJS.register(Tooltip, Legend, ArcElement);
 
-  const pieChartData = {
-    labels: expenses?.map((expense) => expense.category),
-    datasets: [
-      {
-        data: expenses?.map((expense) => expense.amount),
-        backgroundColor: expenses?.map((expense) => expense.color),
-        hoverOffset: 4,
-      },
-    ],
-  };
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
+  // const pieChartData = {
+  //   labels: expenses?.map((expense) => expense.category),
+  //   datasets: [
+  //     {
+  //       data: expenses?.map((expense) => expense.amount),
+  //       backgroundColor: expenses?.map((expense) => expense.color),
+  //       hoverOffset: 4,
+  //     },
+  //   ],
+  // };
+  // const options = {
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //   },
+  // };
+
   return (
     <div className="size-full bg-customGray rounded-2xl p-4">
       <div className="w-[300px]">
-        <Doughnut options={options} data={pieChartData} />
-        <p>Wydatki</p>
+        {/* <Doughnut options={options} data={pieChartData} /> */}
+        <p>Wydatki: {totalExpenses}</p>
         <div className="flex gap-2">
           {isExpensesLoading ? (
             <Loader2 size={60} className="animate-spin text-customCyan" />
           ) : (
             expenses?.map((expense) => {
               return (
-                <div key={expense.id} className="bg-customBlack text-white p-1">
+                <div
+                  key={expense.id}
+                  className="bg-customBlack text-white p-1"
+                  style={{ backgroundColor: expense.color }}
+                >
                   <p>{expense.category}</p>
                   <img
                     src={expense.icon}
@@ -73,14 +81,18 @@ const Home = () => {
           )}
           {expenses?.length === 0 && <p>You don't have any expenses</p>}
         </div>
-        <p className="mt-2">Przychody</p>
+        <p className="mt-2">Przychody: {totalRevenues}</p>
         <div className="flex gap-2">
           {isRevenuesLoading ? (
             <Loader2 size={60} className="animate-spin text-customCyan" />
           ) : (
             revenues?.map((revenue) => {
               return (
-                <div key={revenue.id} className="bg-customBlack text-white p-1">
+                <div
+                  key={revenue.id}
+                  className="bg-customBlack text-white p-1"
+                  style={{ backgroundColor: revenue.color }}
+                >
                   <p>{revenue.category}</p>
                   <img
                     src={revenue.icon}
