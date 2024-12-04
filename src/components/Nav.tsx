@@ -18,7 +18,7 @@ const Nav = () => {
       <div className="flex items-center gap-4">
         <AddTransactions />
         <div className="notification_bell">
-          <IoMdNotificationsOutline className="text-[2.6rem] text-customTextColor hover:bg-customGray rounded-full p-1 cursor-pointer" />
+          <IoMdNotificationsOutline className="text-[2.6rem] text-customTextColor hover:bg-customLightGray rounded-full p-1 cursor-pointer" />
         </div>
         <AvatarMenu userAvatar={userData?.avatar} />
       </div>

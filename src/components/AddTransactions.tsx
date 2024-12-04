@@ -133,7 +133,7 @@ const AddTransactions = () => {
                             className={`${
                               field.value === "expense"
                                 ? "text-customBlack cursor-default bg-customCyan"
-                                : "text-customTextColor bg-customDarkGray hover:bg-customGray hover:text-customBlack transition-colors cursor-pointer"
+                                : "text-customTextColor bg-customLightGray hover:bg-customGray hover:text-customBlack transition-colors cursor-pointer"
                             } shadow-none rounded-[300px] px-6 py-5`}
                             onClick={() => field.onChange("expense")}
                           >
@@ -145,7 +145,7 @@ const AddTransactions = () => {
                             className={`${
                               field.value === "revenue"
                                 ? "text-customBlack cursor-default bg-customCyan"
-                                : "text-customTextColor bg-customDarkGray hover:bg-customGray hover:text-customBlack transition-colors cursor-pointer"
+                                : "text-customTextColor bg-customLightGray hover:bg-customGray hover:text-customBlack transition-colors cursor-pointer"
                             } shadow-none rounded-[300px] px-6 py-5`}
                             onClick={() => field.onChange("revenue")}
                           >

@@ -1,11 +1,11 @@
+import Balance from "@/components/Balance";
+import PieChart from "@/components/PieChart";
+import TotalExpenses from "@/components/TotalExpenses";
+import TotalRevenues from "@/components/TotalRevenues";
 import { TransactionContext } from "@/context/TransactionContext";
 import { useUser } from "@/hooks/useUser";
-import { Timestamp } from "firebase/firestore";
-import { Loader2 } from "lucide-react";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { Doughnut } from "react-chartjs-2";
-// import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,32 +25,15 @@ const Home = () => {
     }
   }, [user, navigate]);
 
-  // ChartJS.register(Tooltip, Legend, ArcElement);
-
-  // const pieChartData = {
-  //   labels: expenses?.map((expense) => expense.category),
-  //   datasets: [
-  //     {
-  //       data: expenses?.map((expense) => expense.amount),
-  //       backgroundColor: expenses?.map((expense) => expense.color),
-  //       hoverOffset: 4,
-  //     },
-  //   ],
-  // };
-  // const options = {
-  //   plugins: {
-  //     legend: {
-  //       display: false,
-  //     },
-  //   },
-  // };
-
   return (
-    <div className="size-full bg-customGray rounded-2xl p-4">
-      <div className="w-[300px]">
-        {/* <Doughnut options={options} data={pieChartData} /> */}
-        <p>Wydatki: {totalExpenses}</p>
-        <div className="flex gap-2">
+    <div className="h-full dashboard_grid">
+      <TotalExpenses totalExpenses={totalExpenses} expenses={expenses} />
+      <TotalRevenues totalRevenues={totalRevenues} revenues={revenues} />
+      <Balance />
+      <PieChart expenses={expenses} totalExpenses={totalExpenses} />
+      <div className="bg-white col-start-1 col-end-7 row-start-4 row-end-5"></div>
+
+      {/* <div className="flex gap-2">
           {isExpensesLoading ? (
             <Loader2 size={60} className="animate-spin text-customCyan" />
           ) : (
@@ -81,7 +64,6 @@ const Home = () => {
           )}
           {expenses?.length === 0 && <p>You don't have any expenses</p>}
         </div>
-        <p className="mt-2">Przychody: {totalRevenues}</p>
         <div className="flex gap-2">
           {isRevenuesLoading ? (
             <Loader2 size={60} className="animate-spin text-customCyan" />
@@ -112,8 +94,7 @@ const Home = () => {
             })
           )}
           {revenues?.length === 0 && <p>You don't have any revenues</p>}
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };
