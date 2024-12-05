@@ -60,7 +60,7 @@ body {
 .dashboard_grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 15% 1fr 1fr 2fr;
+  grid-template-rows: 15% 200px 200px 450px;
   gap: 1em;
 }
 

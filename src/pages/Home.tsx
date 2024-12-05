@@ -1,3 +1,4 @@
+import AreaChart from "@/components/AreaChart";
 import Balance from "@/components/Balance";
 import PieChart from "@/components/PieChart";
 import TotalExpenses from "@/components/TotalExpenses";
@@ -46,8 +47,7 @@ const Home = () => {
       />
       <PieChart expenses={expenses} totalExpenses={totalExpenses} />
       <TransactionTabs />
-      <div className="bg-white col-start-1 col-end-5 row-start-4 row-end-5 "></div>
-
+      <AreaChart expenses={expenses} revenues={revenues} />
       {/* <div className="flex gap-2">
           {isExpensesLoading ? (
             <Loader2 size={60} className="animate-spin text-customCyan" />
