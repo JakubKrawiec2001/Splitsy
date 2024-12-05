@@ -40,7 +40,7 @@ const PieChart = ({ expenses, totalExpenses }: PropsType) => {
   const biggestExpenses = expenses.sort((a, b) => b.amount - a.amount);
 
   return (
-    <div className="col-start-1 col-end-3 row-start-2 row-end-4 bg-white">
+    <div className="col-start-1 col-end-3 row-start-2 row-end-4 bg-white py-4 flex items-center justify-center">
       <Card className="flex flex-col">
         <CardHeader className="items-center pb-0">
           <CardTitle>Expense categories</CardTitle>

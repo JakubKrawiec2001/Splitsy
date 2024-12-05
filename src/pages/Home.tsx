@@ -28,7 +28,7 @@ const Home = () => {
   }, [user, navigate]);
 
   return (
-    <div className="h-full dashboard_grid">
+    <div className="dashboard_grid">
       <TotalExpenses
         totalExpenses={totalExpenses}
         expenses={expenses}
@@ -46,7 +46,7 @@ const Home = () => {
       />
       <PieChart expenses={expenses} totalExpenses={totalExpenses} />
       <TransactionTabs />
-      <div className="bg-white col-start-1 col-end-5 row-start-4 row-end-5"></div>
+      <div className="bg-white col-start-1 col-end-5 row-start-4 row-end-5 "></div>
 
       {/* <div className="flex gap-2">
           {isExpensesLoading ? (

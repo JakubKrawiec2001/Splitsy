@@ -10,7 +10,7 @@ const RevenuesTable = ({ revenues, isRevenuesLoading }: PropsType) => {
   if (isRevenuesLoading)
     return <Loader2 size={60} className="animate-spin text-customCyan" />;
   return (
-    <div className="max-h-[520px] overflow-y-auto custom-scroll">
+    <div className="max-h-[720px] overflow-y-auto custom-scroll">
       <Table>
         <TableBody>
           {revenues.map((revenue) => {
