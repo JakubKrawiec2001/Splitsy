@@ -38,4 +38,5 @@ export type TransactionContextType = {
   isRevenuesLoading: boolean;
   totalRevenues: number;
   totalExpenses: number;
+  balance: number;
 };

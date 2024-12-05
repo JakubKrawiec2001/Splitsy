@@ -1,5 +1,5 @@
 import { TbArrowDownFromArc } from "react-icons/tb";
-import { TrendingUp } from "lucide-react";
+import { Loader2, TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   Card,
@@ -20,9 +20,14 @@ import { TransactionType } from "@/types";
 type PropsType = {
   expenses: TransactionType[];
   totalExpenses: number;
+  isExpensesLoading: boolean;
 };
 
-const TotalExpenses = ({ expenses, totalExpenses }: PropsType) => {
+const TotalExpenses = ({
+  expenses,
+  totalExpenses,
+  isExpensesLoading,
+}: PropsType) => {
   const chartData = expenses.slice(0, 3).map((expense) => ({
     category: expense.category.toLocaleLowerCase(),
     amount: expense.amount,
@@ -42,9 +47,13 @@ const TotalExpenses = ({ expenses, totalExpenses }: PropsType) => {
         <p className="text-customTextColor font-medium text-base xl:text-sm mt-2">
           Total Expenses
         </p>
-        <p className="text-4xl xl:text-2xl 2xl:text-3xl text-customBlack font-medium">
-          ${totalExpenses.toFixed(2)}
-        </p>
+        {isExpensesLoading ? (
+          <Loader2 size={60} className="animate-spin text-customCyan" />
+        ) : (
+          <p className="text-4xl xl:text-2xl 2xl:text-3xl text-customBlack font-medium">
+            ${totalExpenses.toFixed(2)}
+          </p>
+        )}
       </div>
       <ChartContainer
         config={chartConfig}

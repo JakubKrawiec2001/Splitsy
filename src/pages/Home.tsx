@@ -2,6 +2,7 @@ import Balance from "@/components/Balance";
 import PieChart from "@/components/PieChart";
 import TotalExpenses from "@/components/TotalExpenses";
 import TotalRevenues from "@/components/TotalRevenues";
+import TransactionTabs from "@/components/TransactionTabs";
 import { TransactionContext } from "@/context/TransactionContext";
 import { useUser } from "@/hooks/useUser";
 import { useContext, useEffect } from "react";
@@ -13,6 +14,7 @@ const Home = () => {
   const {
     expenses,
     revenues,
+    balance,
     isExpensesLoading,
     isRevenuesLoading,
     totalExpenses,
@@ -27,11 +29,24 @@ const Home = () => {
 
   return (
     <div className="h-full dashboard_grid">
-      <TotalExpenses totalExpenses={totalExpenses} expenses={expenses} />
-      <TotalRevenues totalRevenues={totalRevenues} revenues={revenues} />
-      <Balance />
+      <TotalExpenses
+        totalExpenses={totalExpenses}
+        expenses={expenses}
+        isExpensesLoading={isExpensesLoading}
+      />
+      <TotalRevenues
+        totalRevenues={totalRevenues}
+        revenues={revenues}
+        isRevenuesLoading={isRevenuesLoading}
+      />
+      <Balance
+        balance={balance}
+        isExpensesLoading={isExpensesLoading}
+        isRevenuesLoading={isRevenuesLoading}
+      />
       <PieChart expenses={expenses} totalExpenses={totalExpenses} />
-      <div className="bg-white col-start-1 col-end-7 row-start-4 row-end-5"></div>
+      <TransactionTabs />
+      <div className="bg-white col-start-1 col-end-5 row-start-4 row-end-5"></div>
 
       {/* <div className="flex gap-2">
           {isExpensesLoading ? (

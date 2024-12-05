@@ -6,13 +6,19 @@ import {
 } from "@/components/ui/chart";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import { TransactionType } from "@/types";
+import { Loader2 } from "lucide-react";
 
 type PropsType = {
   revenues: TransactionType[];
   totalRevenues: number;
+  isRevenuesLoading: boolean;
 };
 
-const TotalRevenues = ({ revenues, totalRevenues }: PropsType) => {
+const TotalRevenues = ({
+  revenues,
+  totalRevenues,
+  isRevenuesLoading,
+}: PropsType) => {
   const chartData = revenues.slice(0, 3).map((revenue) => ({
     category: revenue.category.toLocaleLowerCase(),
     amount: revenue.amount,
@@ -31,9 +37,13 @@ const TotalRevenues = ({ revenues, totalRevenues }: PropsType) => {
         <p className="text-customTextColor font-medium text-base xl:text-sm mt-2">
           Total Revenues
         </p>
-        <p className="text-4xl xl:text-2xl 2xl:text-3xl text-customBlack font-medium">
-          ${totalRevenues.toFixed(2)}
-        </p>
+        {isRevenuesLoading ? (
+          <Loader2 size={60} className="animate-spin text-customCyan" />
+        ) : (
+          <p className="text-4xl xl:text-2xl 2xl:text-3xl text-customBlack font-medium">
+            ${totalRevenues.toFixed(2)}
+          </p>
+        )}
       </div>
       <ChartContainer
         config={chartConfig}

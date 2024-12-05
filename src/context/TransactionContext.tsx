@@ -11,6 +11,7 @@ const initialValue = {
   isRevenuesLoading: false,
   totalExpenses: 0,
   totalRevenues: 0,
+  balance: 0,
 };
 
 export const TransactionContext =
@@ -32,6 +33,9 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
     (acc, revenue) => acc + (revenue.amount || 0),
     0
   );
+
+  const balance = totalRevenues - totalExpenses;
+
   return (
     <TransactionContext.Provider
       value={{
@@ -41,6 +45,7 @@ export const TransactionProvider = ({ children }: { children: ReactNode }) => {
         isRevenuesLoading,
         totalExpenses,
         totalRevenues,
+        balance,
       }}
     >
       {children}
