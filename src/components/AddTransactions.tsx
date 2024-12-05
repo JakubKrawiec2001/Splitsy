@@ -188,6 +188,7 @@ const AddTransactions = () => {
                           </FormLabel>
                           <FormControl>
                             <Input
+                              maxLength={15}
                               className="mt-1"
                               placeholder="Describe transaction"
                               {...field}

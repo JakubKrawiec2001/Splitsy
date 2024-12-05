@@ -3,42 +3,41 @@ import { TransactionType } from "@/types";
 import { Loader2 } from "lucide-react";
 
 type PropsType = {
-  expenses: TransactionType[];
-  isExpensesLoading: boolean;
+  revenues: TransactionType[];
+  isRevenuesLoading: boolean;
 };
-
-const ExpensesTable = ({ expenses, isExpensesLoading }: PropsType) => {
-  if (isExpensesLoading)
+const RevenuesTable = ({ revenues, isRevenuesLoading }: PropsType) => {
+  if (isRevenuesLoading)
     return <Loader2 size={60} className="animate-spin text-customCyan" />;
   return (
     <div className="max-h-[520px] overflow-y-auto custom-scroll">
       <Table>
         <TableBody>
-          {expenses.map((expense) => {
+          {revenues.map((revenue) => {
             return (
               <TableRow>
                 <TableCell className="flex items-center gap-4 2xl:gap-6">
                   <div
                     className="rounded-full xl:size-[40px] 2xl:size-[45px] hidden xl:block"
-                    style={{ backgroundColor: expense.color }}
+                    style={{ backgroundColor: revenue.color }}
                   >
                     <img
-                      src={expense.icon}
+                      src={revenue.icon}
                       alt=""
                       className="w-full p-2 xl:p-3 invert-[1]"
                     />
                   </div>
                   <div>
                     <p className="truncate text-customBlack text-base">
-                      {expense.category}
+                      {revenue.category}
                     </p>
                     <p className="text-customTextColor">
-                      {expense.description}
+                      {revenue.description}
                     </p>
                   </div>
                 </TableCell>
                 <TableCell className="text-right text-customBlack text-base font-semibold xl:pr-8">
-                  ${expense.amount}
+                  ${revenue.amount}
                 </TableCell>
               </TableRow>
             );
@@ -49,4 +48,4 @@ const ExpensesTable = ({ expenses, isExpensesLoading }: PropsType) => {
   );
 };
 
-export default ExpensesTable;
+export default RevenuesTable;

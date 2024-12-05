@@ -36,7 +36,10 @@ export const expenseSchema = z.object({
     .min(1, "The amount must be greater than 0"),
   description: z
     .string()
-    .min(1, { message: "Add a description of the expense" }),
+    .min(3, { message: "The description should contain at least 3 characters" })
+    .max(15, {
+      message: "The description should contain a maximum of 15 characters",
+    }),
   category: z.enum(
     [
       "Health",

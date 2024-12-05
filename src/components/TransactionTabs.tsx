@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ExpensesTable from "./ExpensesTable";
 import { useContext } from "react";
 import { TransactionContext } from "@/context/TransactionContext";
+import RevenuesTable from "./RevenuesTable";
 
 const TransactionTabs = () => {
   const { expenses, revenues, isExpensesLoading, isRevenuesLoading } =
@@ -19,7 +20,13 @@ const TransactionTabs = () => {
             isExpensesLoading={isExpensesLoading}
           />
         </TabsContent>
-        <TabsContent value="revenues">Rvenues table</TabsContent>
+        <TabsContent value="revenues">
+          {" "}
+          <RevenuesTable
+            revenues={revenues}
+            isRevenuesLoading={isRevenuesLoading}
+          />
+        </TabsContent>
       </Tabs>
     </div>
   );
