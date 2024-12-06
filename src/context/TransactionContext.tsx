@@ -1,7 +1,7 @@
 import { useFetchCurrentUserExpenses } from "@/hooks/useFetchCurrentUserExpenses";
 import { useFetchCurrentUserRevenues } from "@/hooks/useFetchCurrentUserRevenues";
 import { useUser } from "@/hooks/useUser";
-import { TransactionContextType } from "@/types";
+import { TransactionContextType, TransactionType } from "@/types";
 import { createContext, ReactNode } from "react";
 
 const initialValue = {

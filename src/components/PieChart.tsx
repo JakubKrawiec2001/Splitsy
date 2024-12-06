@@ -13,6 +13,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { TransactionType } from "@/types";
+import { sumTransactionsByCategory } from "@/lib/utils";
 
 type PropsType = {
   expenses: TransactionType[];
@@ -20,9 +21,10 @@ type PropsType = {
 };
 
 const PieChart = ({ expenses, totalExpenses }: PropsType) => {
-  const chartData = expenses.map((expense) => ({
+  const groupedExpenseCategories = sumTransactionsByCategory(expenses);
+  const chartData = groupedExpenseCategories.map((expense) => ({
     category: expense.category.toLocaleLowerCase(),
-    amount: expense.amount,
+    amount: expense.totalAmount,
     fill: expense.color,
   }));
 
@@ -37,7 +39,9 @@ const PieChart = ({ expenses, totalExpenses }: PropsType) => {
     {}
   );
 
-  const biggestExpenses = expenses.sort((a, b) => b.amount - a.amount);
+  const biggestExpenses = groupedExpenseCategories.sort(
+    (a, b) => b.totalAmount - a.totalAmount
+  );
 
   return (
     <div className="col-start-1 col-end-3 row-start-2 row-end-4 bg-white py-4 flex items-center justify-center">
