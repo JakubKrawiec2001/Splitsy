@@ -48,3 +48,23 @@ export type GroupedTransactionType = {
   id: string;
   color: string;
 };
+
+// export type TransactionColumnType = {
+//   id: string;
+//   amount: number;
+//   category:
+//     | "Health"
+//     | "Leisure"
+//     | "Home"
+//     | "Cafe"
+//     | "Education"
+//     | "Gifts"
+//     | "Groceries"
+//     | "Family"
+//     | "Workout"
+//     | "Transportation"
+//     | "Work"
+//     | "Restaurants"
+//     | "Other";
+//   description: string;
+// };
