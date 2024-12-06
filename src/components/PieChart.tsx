@@ -44,7 +44,7 @@ const PieChart = ({ expenses, totalExpenses }: PropsType) => {
   );
 
   return (
-    <div className="col-start-1 col-end-3 row-start-2 row-end-4 bg-white py-4 flex items-center justify-center">
+    <div className="col-start-1 col-end-3 row-start-2 row-end-4 bg-white py-4 flex items-center justify-center w-[80%]">
       <Card className="flex flex-col">
         <CardHeader className="items-center pb-0">
           <CardTitle>Expense categories</CardTitle>
@@ -107,7 +107,7 @@ const PieChart = ({ expenses, totalExpenses }: PropsType) => {
             Latest biggest expenses
           </p>{" "}
           <div className="flex flex-wrap items-center justify-center gap-6 w-full">
-            {biggestExpenses.slice(0, 4).map((expense) => {
+            {biggestExpenses.slice(0, 3).map((expense) => {
               return (
                 <div key={expense.id} className="flex items-center gap-2">
                   <div

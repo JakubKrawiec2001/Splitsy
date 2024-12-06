@@ -40,27 +40,10 @@ export const expenseSchema = z.object({
     .max(15, {
       message: "The description should contain a maximum of 15 characters",
     }),
-  category: z.enum(
-    [
-      "Health",
-      "Leisure",
-      "Home",
-      "Cafe",
-      "Education",
-      "Gifts",
-      "Groceries",
-      "Family",
-      "Workout",
-      "Transportation",
-      "Work",
-      "Restaurants",
-      "Other",
-    ],
-    { message: `Select or add a category` }
-  ),
-  color: z
-    .string()
-    .regex(/^#[0-9A-F]{6}$/i, "Invalid color format")
-    .min(1, "Select a category color"),
-  icon: z.string().min(1, { message: "You must select an icon" }),
+  category: z.object({
+    id: z.string(),
+    label: z.string(),
+    icon: z.string(),
+    color: z.string(),
+  }),
 });

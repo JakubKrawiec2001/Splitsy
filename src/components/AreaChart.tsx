@@ -14,7 +14,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { TransactionType } from "@/types";
+import { GroupedTransactionType, TransactionType } from "@/types";
+import { sumTransactionsByCategory } from "@/lib/utils";
 
 type PropsType = {
   revenues: TransactionType[];
@@ -22,9 +23,12 @@ type PropsType = {
 };
 
 const AreaChart = ({ revenues, expenses }: PropsType) => {
+  const groupedExpenseCategories = sumTransactionsByCategory(expenses);
+  const groupedRevenuesCategories = sumTransactionsByCategory(revenues);
+
   const createChartData = (
-    expenses: TransactionType[],
-    revenues: TransactionType[]
+    expenses: GroupedTransactionType[],
+    revenues: GroupedTransactionType[]
   ) => {
     const categories = [
       ...new Set([
@@ -39,15 +43,18 @@ const AreaChart = ({ revenues, expenses }: PropsType) => {
 
       return {
         category,
-        expenses: expense ? expense.amount : 0,
-        revenues: revenue ? revenue.amount : 0,
+        expenses: expense ? expense.totalAmount : 0,
+        revenues: revenue ? revenue.totalAmount : 0,
       };
     });
 
     return chartData;
   };
 
-  const chartData = createChartData(expenses, revenues);
+  const chartData = createChartData(
+    groupedExpenseCategories,
+    groupedRevenuesCategories
+  );
 
   const chartConfig = {
     expenses: {
@@ -109,7 +116,7 @@ const AreaChart = ({ revenues, expenses }: PropsType) => {
                 dataKey="category"
                 tickLine={false}
                 axisLine={false}
-                tickMargin={8}
+                tickMargin={20}
                 minTickGap={32}
                 tickFormatter={(value) => value}
               />

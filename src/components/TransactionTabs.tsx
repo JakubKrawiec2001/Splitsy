@@ -10,9 +10,14 @@ const TransactionTabs = () => {
   return (
     <div className="bg-white shadow-sm rounded-[5px] col-start-5 col-end-7 row-start-2 row-end-5 p-6 pr-2">
       <Tabs defaultValue="expenses">
-        <TabsList>
-          <TabsTrigger value="expenses">Expenses</TabsTrigger>
-          <TabsTrigger value="revenues">Revenues</TabsTrigger>
+        <TabsList className="flex justify-between pr-6">
+          <p className="text-customBlack font-semibold">
+            List of recent transactions
+          </p>
+          <div className="flex gap-4">
+            <TabsTrigger value="expenses">Expenses</TabsTrigger>
+            <TabsTrigger value="revenues">Revenues</TabsTrigger>
+          </div>
         </TabsList>
         <TabsContent value="expenses" className="mt-4">
           <ExpensesTable

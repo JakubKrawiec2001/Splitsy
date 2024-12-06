@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { expenseSchema } from "@/utils/schemas";
 import { useUser } from "@/hooks/useUser";
@@ -12,13 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "./ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import {
   Dialog,
   DialogContent,
@@ -28,7 +22,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaPlus } from "react-icons/fa6";
-import { categories, iconList } from "@/constansts";
+import { categories } from "@/constansts";
 import { useAddExpenses } from "@/hooks/useAddExpenses";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -46,7 +40,6 @@ const AddTransactions = () => {
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
     defaultValues: {
-      color: "#000000",
       transactionType: "expense",
     },
   });
@@ -58,10 +51,10 @@ const AddTransactions = () => {
       userID: userData?.id,
       amount: data.amount,
       description: data.description,
-      category: data.category,
-      color: data.color,
+      category: data.category.label,
+      color: data.category.color,
       createdAt: serverTimestamp(),
-      icon: data.icon,
+      icon: data.category.icon,
     };
     if (data.transactionType === "expense") {
       addExpense.mutate(transactionData, {
@@ -98,10 +91,6 @@ const AddTransactions = () => {
     }
   };
 
-  const colorValue = useWatch({
-    control: form.control,
-    name: "color",
-  });
   return (
     <>
       <Dialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
@@ -174,7 +163,7 @@ const AddTransactions = () => {
                               }
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="mt-2" />
                         </div>
                       )}
                     />
@@ -194,7 +183,7 @@ const AddTransactions = () => {
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="mt-2" />
                         </div>
                       )}
                     />
@@ -203,85 +192,45 @@ const AddTransactions = () => {
                       name="category"
                       render={({ field }) => (
                         <div className="w-full">
-                          <FormLabel className="text-customBlack">
-                            Categories
-                          </FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            {...field}
-                          >
-                            <FormControl className="mt-1">
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select categorie" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {categories.map((category) => (
-                                <SelectItem
-                                  key={category}
-                                  value={category}
-                                  className="mb-1"
-                                >
-                                  {category}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </div>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="color"
-                      render={({ field }) => (
-                        <div className="w-full flex flex-col">
-                          <FormLabel>Select color</FormLabel>
-                          <FormControl className="mt-2">
-                            <input
-                              type="color"
-                              value={field.value}
-                              onChange={field.onChange}
-                              className="h-12 w-full bg-customBlack p-1 rounded-[5px] cursor-pointer"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </div>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="icon"
-                      render={({ field }) => (
-                        <div className="w-full">
-                          <FormLabel>Choose icon</FormLabel>
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {iconList.map((icon) => {
+                          <FormLabel>Choose category</FormLabel>
+                          <div className="grid grid-cols-5 grid-rows-3 gap-6  mt-4">
+                            {categories.map((category) => {
                               return (
                                 <div
-                                  key={icon.id}
-                                  className={`p-3 opacity-100 ${
-                                    field.value === icon.icon
-                                      ? "rounded-xl"
-                                      : "rounded-full hover:opacity-60 transition-opacity cursor-pointer"
-                                  }`}
-                                  style={{ backgroundColor: colorValue }}
+                                  className="flex flex-col items-center gap-1 group"
                                   onClick={() => {
-                                    field.onChange(icon.icon);
+                                    field.onChange(category);
                                   }}
                                 >
-                                  <img
-                                    src={icon.icon}
-                                    alt=""
-                                    className="w-[30px] invert-[1]"
-                                  />
+                                  <div
+                                    key={category.id}
+                                    className={`p-3 opacity-100  ${
+                                      field.value?.id === category.id
+                                        ? "rounded-xl"
+                                        : "rounded-full hover:opacity-60 transition-opacity cursor-pointer"
+                                    }`}
+                                    style={{ backgroundColor: category.color }}
+                                  >
+                                    <img
+                                      src={category.icon}
+                                      alt=""
+                                      className="w-[30px] invert-[1]"
+                                    />
+                                  </div>
+                                  <p
+                                    className={`text-sm group-hover:text-black ${
+                                      field.value?.id === category.id
+                                        ? "text-black"
+                                        : "text-customBlack"
+                                    }`}
+                                  >
+                                    {category.label}
+                                  </p>
                                 </div>
                               );
                             })}
                           </div>
-                          <FormMessage />
+                          <FormMessage className="mt-4" />
                         </div>
                       )}
                     />

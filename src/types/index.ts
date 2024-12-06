@@ -40,3 +40,11 @@ export type TransactionContextType = {
   totalExpenses: number;
   balance: number;
 };
+
+export type GroupedTransactionType = {
+  category: string;
+  totalAmount: number;
+  icon: string;
+  id: string;
+  color: string;
+};
