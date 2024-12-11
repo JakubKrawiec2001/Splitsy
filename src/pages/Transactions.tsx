@@ -1,5 +1,5 @@
 import { TransactionContext } from "@/context/TransactionContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import DataTable from "@/components/DataTable";
 import { TransactionType } from "@/types";
@@ -8,15 +8,9 @@ import { ArrowUpDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const Transactions = () => {
-  const {
-    expenses,
-    revenues,
-    balance,
-    isExpensesLoading,
-    isRevenuesLoading,
-    totalExpenses,
-    totalRevenues,
-  } = useContext(TransactionContext);
+  const [transactions, setTransactions] = useState("expenses");
+  const { expenses, revenues, isExpensesLoading, isRevenuesLoading } =
+    useContext(TransactionContext);
 
   const columns: ColumnDef<TransactionType>[] = [
     {
@@ -101,7 +95,13 @@ const Transactions = () => {
 
   return (
     <div className="h-full border-t">
-      <DataTable columns={columns} data={expenses} />
+      <DataTable
+        columns={columns}
+        data={transactions === "expenses" ? expenses : revenues}
+        setTransactions={setTransactions}
+        isExpensesLoading={isExpensesLoading}
+        isRevenuesLoading={isRevenuesLoading}
+      />
     </div>
   );
 };
