@@ -33,3 +33,5 @@ export const sumTransactionsByCategory = (transactions: TransactionType[]) => {
     color: data.color,
   }));
 };
+
+
