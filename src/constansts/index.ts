@@ -27,7 +27,6 @@ import { IoIosCard } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";
 import { MdSavings } from "react-icons/md";
 import { MdAnalytics } from "react-icons/md";
-import { FaWallet } from "react-icons/fa";
 
 export const avatars = [
   {
@@ -89,12 +88,6 @@ export const navLinks = [
     label: "Reports",
     icon: MdAnalytics,
     path: "/reports",
-  },
-  {
-    id: 6,
-    label: "My Wallet",
-    icon: FaWallet,
-    path: "/my-wallet",
   },
 ];
 
