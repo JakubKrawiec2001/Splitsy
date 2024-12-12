@@ -120,6 +120,7 @@ const AreaChart = ({ revenues, expenses }: PropsType) => {
                 minTickGap={32}
                 tickFormatter={(value) => value}
               />
+
               <ChartTooltip
                 cursor={false}
                 content={

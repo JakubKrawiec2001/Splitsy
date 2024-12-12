@@ -116,7 +116,7 @@ const DataTable = <TData, TValue>({
           }
           className="max-w-sm bg-white"
         />
-        <div className="flex items-center gap-4 ml-6">
+        <div className="flex items-center gap-4 ml-6 h-12">
           <Select
             defaultValue="expenses"
             onValueChange={(value) => setTransactions(value)}
@@ -130,13 +130,20 @@ const DataTable = <TData, TValue>({
             </SelectContent>
           </Select>
           <Button
-            disabled={selectedRows.length === 0}
+            disabled={selectedRows.length === 0 || deleteTransaction.isPending}
             className={`${
               selectedRows.length >= 1 ? "opacity-100" : "opacity-50"
-            } bg-red-500`}
+            } bg-[#FF2F55] h-full px-6 rounded-[5px] hover:bg-[#ff2f55c2] transition-all`}
             onClick={handleDelete}
           >
-            Delete
+            {deleteTransaction.isPending ? (
+              <span className="flex items-center gap-2">
+                <Loader2 size={20} className="animate-spin" />
+                Loading...
+              </span>
+            ) : (
+              "Delete"
+            )}
           </Button>
         </div>
         <DropdownMenu>

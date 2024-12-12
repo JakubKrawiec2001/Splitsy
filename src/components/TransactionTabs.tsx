@@ -20,10 +20,6 @@ const TransactionTabs = () => {
           </div>
         </TabsList>
         <TabsContent value="expenses" className="mt-4">
-          <ExpensesTable
-            expenses={expenses}
-            isExpensesLoading={isExpensesLoading}
-          />
           {expenses.length === 0 ? (
             <p className="text-customTextColor mt-12 text-center">
               There is no expense. <br /> Add your first expense.
