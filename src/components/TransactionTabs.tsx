@@ -24,13 +24,29 @@ const TransactionTabs = () => {
             expenses={expenses}
             isExpensesLoading={isExpensesLoading}
           />
+          {expenses.length === 0 ? (
+            <p className="text-customTextColor mt-12 text-center">
+              There is no expense. <br /> Add your first expense.
+            </p>
+          ) : (
+            <ExpensesTable
+              expenses={expenses}
+              isExpensesLoading={isExpensesLoading}
+            />
+          )}
         </TabsContent>
         <TabsContent value="revenues" className="mt-4">
           {" "}
-          <RevenuesTable
-            revenues={revenues}
-            isRevenuesLoading={isRevenuesLoading}
-          />
+          {revenues.length === 0 ? (
+            <p className="text-customTextColor mt-12 text-center">
+              There is no revenue. <br /> Add your first revenue.
+            </p>
+          ) : (
+            <RevenuesTable
+              revenues={revenues}
+              isRevenuesLoading={isRevenuesLoading}
+            />
+          )}
         </TabsContent>
       </Tabs>
     </div>

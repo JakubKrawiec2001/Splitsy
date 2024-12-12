@@ -28,8 +28,10 @@ export const useDeletTransaction = (currentUserId: string) => {
       type: string;
       transactionId: string;
     }) => deleteTransaction({ type, transactionId }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["expenses", currentUserId] });
+    onSuccess: (_, { type }) => {
+      queryClient.invalidateQueries({
+        queryKey: [type, currentUserId],
+      });
     },
   });
 };
