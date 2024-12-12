@@ -29,10 +29,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loader2 } from "lucide-react";
-import { useTruncate } from "@/hooks/useTruncate";
+import TransactionsBarChart from "@/components/TransactionsBarChart";
+import TransactionsLineChart from "@/components/TransactionsLineChart";
 
 const Reports = () => {
   const [transactionType, setTransactionType] = useState("expenses");
+  const [chartType, setChartType] = useState("bar");
   const {
     expenses,
     revenues,
@@ -42,7 +44,6 @@ const Reports = () => {
     totalExpenses,
     totalRevenues,
   } = useContext(TransactionContext);
-  const { truncateText } = useTruncate(1400, 4);
 
   const groupedExpenseCategories = sumTransactionsByCategory(expenses);
   const groupedRevenueCategories = sumTransactionsByCategory(revenues);
@@ -76,6 +77,7 @@ const Reports = () => {
     },
     {}
   );
+
   return (
     <Card className="bg-white rounded-[5px] p-6">
       <div className="flex items-center justify-between">
@@ -89,62 +91,51 @@ const Reports = () => {
             </span>
           </CardDescription>
         </CardHeader>
-        <Select
-          defaultValue="expenses"
-          onValueChange={(value) => setTransactionType(value)}
-        >
-          <SelectTrigger className="w-[180px] bg-customBlack text-white font-semibold hover:bg-customBlackHover transition-colors">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="expenses">Expenses</SelectItem>
-            <SelectItem value="revenues">Revenues</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex gap-4">
+          <Select
+            defaultValue="expenses"
+            onValueChange={(value) => setTransactionType(value)}
+          >
+            <SelectTrigger className="w-[180px] bg-customBlack text-white font-semibold hover:bg-customBlackHover transition-colors">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="expenses">Expenses</SelectItem>
+              <SelectItem value="revenues">Revenues</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select
+            defaultValue="bar"
+            onValueChange={(value) => setChartType(value)}
+          >
+            <SelectTrigger className="w-[180px] bg-customCyan text-customBlack font-semibold hover:bg-customBlackHover transition-colors">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="bar">Bar Chart</SelectItem>
+              <SelectItem value="line">Line Chart</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <CardContent className="mt-8">
         {!isExpensesLoading || !isRevenuesLoading ? (
-          <ChartContainer
-            config={chartConfig}
-            className="aspect-auto lg:h-[320px] 2xl:h-[300px] w-full"
-          >
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="category"
-                tickLine={false}
-                tickMargin={12}
-                axisLine={false}
-                className="font-medium capitalize"
-                tickFormatter={(value) =>
-                  truncateText(
-                    chartConfig[value as keyof typeof chartConfig]?.label ?? ""
-                  )
-                }
-              />
-              <YAxis
-                dataKey="amount"
-                tickMargin={20}
-                tickLine={false}
-                axisLine={false}
-                className="font-bold"
-                tickFormatter={(value) => value.toLocaleString()}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <Bar
-                dataKey="amount"
-                strokeWidth={4}
-                radius={8}
-                activeBar={({ ...props }) => {
-                  return <Rectangle {...props} stroke={props.payload.fill} />;
-                }}
-              />
-            </BarChart>
-          </ChartContainer>
+          chartType === "bar" ? (
+            <TransactionsBarChart
+              chartData={chartData}
+              chartConfig={chartConfig}
+            />
+          ) : (
+            <TransactionsLineChart
+              chartData={chartData}
+              chartConfig={chartConfig}
+            />
+          )
         ) : (
           <Loader2 size={60} className="animate-spin text-customCyan" />
         )}
       </CardContent>
+      <CardContent></CardContent>
     </Card>
   );
 };

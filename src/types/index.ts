@@ -49,22 +49,16 @@ export type GroupedTransactionType = {
   color: string;
 };
 
-// export type TransactionColumnType = {
-//   id: string;
-//   amount: number;
-//   category:
-//     | "Health"
-//     | "Leisure"
-//     | "Home"
-//     | "Cafe"
-//     | "Education"
-//     | "Gifts"
-//     | "Groceries"
-//     | "Family"
-//     | "Workout"
-//     | "Transportation"
-//     | "Work"
-//     | "Restaurants"
-//     | "Other";
-//   description: string;
-// };
+export type ChartConfigType = {
+  [key: string]: {
+    label: string;
+    amount: number;
+    color: string;
+  };
+};
+
+export type ChartDataType = {
+  category: string;
+  amount: number;
+  fill: string;
+};
