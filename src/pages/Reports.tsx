@@ -1,23 +1,11 @@
 import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Rectangle,
-  XAxis,
-  YAxis,
-} from "recharts";
-import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+
 import { useContext, useState } from "react";
 import { TransactionContext } from "@/context/TransactionContext";
 import { sumTransactionsByCategory } from "@/lib/utils";
@@ -35,15 +23,8 @@ import TransactionsLineChart from "@/components/TransactionsLineChart";
 const Reports = () => {
   const [transactionType, setTransactionType] = useState("expenses");
   const [chartType, setChartType] = useState("bar");
-  const {
-    expenses,
-    revenues,
-    balance,
-    isExpensesLoading,
-    isRevenuesLoading,
-    totalExpenses,
-    totalRevenues,
-  } = useContext(TransactionContext);
+  const { expenses, revenues, isExpensesLoading, isRevenuesLoading } =
+    useContext(TransactionContext);
 
   const groupedExpenseCategories = sumTransactionsByCategory(expenses);
   const groupedRevenueCategories = sumTransactionsByCategory(revenues);

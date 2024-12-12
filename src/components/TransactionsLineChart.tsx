@@ -2,7 +2,6 @@ import { ChartConfigType, ChartDataType } from "@/types";
 import {
   ChartContainer,
   ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -19,7 +18,7 @@ const TransactionsLineChart = ({ chartData, chartConfig }: PropsType) => {
       config={chartConfig}
       className="aspect-auto lg:h-[320px] 2xl:h-[300px] w-full"
     >
-      <LineChart accessibilityLayer data={chartData}>
+      <LineChart accessibilityLayer data={chartData} margin={{ top: 35 }}>
         <CartesianGrid vertical={false} />
         <YAxis
           dataKey="amount"

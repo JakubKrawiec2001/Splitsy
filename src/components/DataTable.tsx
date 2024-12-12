@@ -37,6 +37,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useDeletTransaction } from "@/hooks/useDeleteTransaction";
+import { useUser } from "@/hooks/useUser";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -57,6 +59,9 @@ const DataTable = <TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const { userData } = useUser();
+
+  const deleteTransaction = useDeletTransaction(userData?.id);
 
   const table = useReactTable({
     data,
@@ -76,6 +81,28 @@ const DataTable = <TData, TValue>({
       rowSelection,
     },
   });
+  const selectedRows = table
+    .getSelectedRowModel()
+    .rows.map(
+      (row) => row.original as TData & { transactionType: string; id: string }
+    );
+
+  const handleDelete = () => {
+    selectedRows.forEach((row) => {
+      deleteTransaction.mutate(
+        {
+          type: row.transactionType + "s",
+          transactionId: row.id,
+        },
+        {
+          onSuccess: () => {
+            table.resetRowSelection();
+          },
+        }
+      );
+    });
+  };
+
   return (
     <>
       <div className="flex items-center py-4">
@@ -102,6 +129,15 @@ const DataTable = <TData, TValue>({
               <SelectItem value="revenues">Revenues</SelectItem>
             </SelectContent>
           </Select>
+          <Button
+            disabled={selectedRows.length === 0}
+            className={`${
+              selectedRows.length >= 1 ? "opacity-100" : "opacity-50"
+            } bg-red-500`}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
