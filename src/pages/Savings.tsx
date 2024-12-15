@@ -4,52 +4,107 @@ import { TransactionContext } from "@/context/TransactionContext";
 import { useFetchCurrentUserGoals } from "@/hooks/useFetchCurrentUserGoals";
 import { useUser } from "@/hooks/useUser";
 import { Loader2 } from "lucide-react";
-import { useContext } from "react";
-import { CiCirclePlus } from "react-icons/ci";
+import { useContext, useState } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { FaInfoCircle } from "react-icons/fa";
 
 const Savings = () => {
-	const { userData } = useUser();
-	const { data: goals, isPending: isGoalsLoading } = useFetchCurrentUserGoals(
-		userData?.id
-	);
-	const { balance } = useContext(TransactionContext);
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const { userData } = useUser();
+  const { data: goals, isPending: isGoalsLoading } = useFetchCurrentUserGoals(
+    userData?.id
+  );
+  const { balance } = useContext(TransactionContext);
 
-	const calculateProgress = (goalAmount: number) =>
-		Math.min((balance / goalAmount) * 100, 100);
+  const calculateProgress = (goalAmount: number) =>
+    Math.min((balance / goalAmount) * 100, 100);
 
-	return (
-		<div className="bg-white rounded-[5px] p-10 flex flex-col gap-10">
-			{!isGoalsLoading ? (
-				goals?.map((goal) => {
-					const progress = calculateProgress(goal.goal);
-					return (
-						<div key={goal.id}>
-							<div className="flex items-center justify-between gap-4">
-								<p className="font-semibold text-customBlack">
-									Goal of saving:{" "}
-									<span className="font-normal"> {goal.label}</span>
-								</p>
-								<p>
-									{balance}/{goal.goal}{" "}
-									<span className="text-customTextColor">
-										({progress.toFixed(0)}%)
-									</span>
-								</p>
-							</div>
-							<Progress
-								value={progress}
-								progress={progress}
-								className="h-16 rounded-[5px] mt-2"
-							/>
-						</div>
-					);
-				})
-			) : (
-				<Loader2 size={60} className="animate-spin text-customCyan" />
-			)}
-			<AddNewGoal />
-		</div>
-	);
+  return (
+    <>
+      <div className="bg-white rounded-[5px] p-10 flex flex-col">
+        <p className="font-medium text-lg mb-4 text-customBlack">
+          Plan your savings goals
+        </p>
+        <AddNewGoal
+          isOpenDialog={isOpenDialog}
+          setIsOpenDialog={setIsOpenDialog}
+        />
+      </div>
+      {goals?.length === 0 && (
+        <p className="text-customTextColor text-center">
+          You don't have planned achievement goals.{" "}
+          <span
+            className="font-medium underline cursor-pointer hover:text-customBlackHover"
+            onClick={() => setIsOpenDialog(true)}
+          >
+            Add a new one
+          </span>
+        </p>
+      )}
+      <div className="flex flex-col gap-4">
+        {!isGoalsLoading ? (
+          goals?.map((goal) => {
+            const progress = calculateProgress(goal.goal);
+            return (
+              <div key={goal.id} className="bg-white rounded-[5px] p-10">
+                <div className="flex justify-between gap-4">
+                  <div className="flex flex-col">
+                    <p className="text-customTextColor">Goal of saving</p>
+                    <span className="font-semibold text-customBlack text-lg">
+                      {goal.label}
+                    </span>
+                  </div>
+                  <div className="flex items-center self-end gap-1">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <FaInfoCircle className="text-gray-300 hover:text-gray-400 transition-colors" />
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-white shadow-md rounded-[5px] text-customTextColor w-[50%]">
+                          <p>
+                            Your savings goals are automatically calculated
+                            based on your balance in the app. <br />
+                            <span className="font-bold">
+                              Your current balance is: ${balance}
+                            </span>
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <p>
+                      {balance} /{" "}
+                      <span className="font-medium">{goal.goal}</span>
+                      <span
+                        className={`ml-2 ${
+                          progress === 100
+                            ? "text-green-500 font-semibold"
+                            : "text-customTextColor"
+                        }`}
+                      >
+                        ({progress.toFixed(0)}%)
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <Progress
+                  value={progress}
+                  progress={progress}
+                  className="h-16 rounded-[5px] mt-2"
+                />
+              </div>
+            );
+          })
+        ) : (
+          <Loader2 size={60} className="animate-spin text-customCyan" />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Savings;
