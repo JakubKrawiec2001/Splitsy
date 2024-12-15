@@ -1,3 +1,4 @@
+import AddNewGoal from "@/components/AddNewGoal";
 import { Progress } from "@/components/ui/progress";
 import { TransactionContext } from "@/context/TransactionContext";
 import { useFetchCurrentUserGoals } from "@/hooks/useFetchCurrentUserGoals";
@@ -46,9 +47,7 @@ const Savings = () => {
 			) : (
 				<Loader2 size={60} className="animate-spin text-customCyan" />
 			)}
-			<div className="group flex items-center justify-center hover:border-customBlackHover border-dashed border-2 border-gray-300 h-24 transition-colors cursor-pointer rounded-[5px]">
-				<CiCirclePlus className="text-6xl text-gray-300 group-hover:text-customBlackHover transition-colors" />
-			</div>
+			<AddNewGoal />
 		</div>
 	);
 };
