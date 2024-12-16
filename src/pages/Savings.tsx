@@ -46,8 +46,8 @@ const Savings = () => {
 
   return (
     <>
-      <div className="bg-white rounded-[5px] p-10 flex flex-col">
-        <p className="font-medium text-lg mb-4 text-customBlack">
+      <div className="bg-white rounded-[5px] p-4 2lg:p-10 flex flex-col">
+        <p className="font-medium 2lg:text-lg mb-4 text-customBlack">
           Plan your savings goals
         </p>
         <AddNewGoal
@@ -73,20 +73,22 @@ const Savings = () => {
             return (
               <div
                 key={goal.id}
-                className="bg-white rounded-[5px] p-10 relative"
+                className="bg-white rounded-[5px] p-4 2lg:p-10 relative"
               >
                 {deleteGoal.isPending ? (
                   <Loader2 size={30} className="animate-spin text-[#FF2F55]" />
                 ) : (
                   <FaTrashAlt
-                    className="absolute top-4 right-4 text-lg text-[#FF2F55] hover:text-[#ff2f55c2] transition-colors cursor-pointer"
+                    className="absolute top-4 right-4 md:text-lg text-[#FF2F55] hover:text-[#ff2f55c2] transition-colors cursor-pointer"
                     onClick={() => handleDeleteGoal(goal.id!)}
                   />
                 )}
                 <div className="flex justify-between gap-4">
                   <div className="flex flex-col">
-                    <p className="text-customTextColor">Goal of saving</p>
-                    <span className="font-semibold text-customBlack text-lg">
+                    <p className="text-customTextColor text-sm md:text-base">
+                      Goal of saving
+                    </p>
+                    <span className="font-semibold text-customBlack text-base md:text-lg">
                       {goal.label}
                     </span>
                   </div>
@@ -94,7 +96,7 @@ const Savings = () => {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <FaInfoCircle className="text-gray-300 hover:text-gray-400 transition-colors" />
+                          <FaInfoCircle className="text-gray-300 hover:text-gray-400 transition-colors hidden 2lg:block" />
                         </TooltipTrigger>
                         <TooltipContent className="bg-white shadow-md rounded-[5px] text-customTextColor w-[50%]">
                           <p>
@@ -107,7 +109,7 @@ const Savings = () => {
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
-                    <p>
+                    <p className="text-xs md:text-base">
                       {balance} /{" "}
                       <span className="font-medium">{goal.goal}</span>
                       <span
@@ -125,7 +127,7 @@ const Savings = () => {
                 <Progress
                   value={progress}
                   progress={progress}
-                  className="h-16 rounded-[5px] mt-2"
+                  className="h-12 md:h-16 rounded-[5px] mt-2"
                 />
               </div>
             );

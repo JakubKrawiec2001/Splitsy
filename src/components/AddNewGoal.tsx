@@ -70,8 +70,8 @@ const AddNewGoal = ({ isOpenDialog, setIsOpenDialog }: PropsType) => {
     <>
       <Dialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
         <DialogTrigger className="outline-none">
-          <div className="group flex items-center justify-center hover:border-customBlackHover border-dashed border-2 border-gray-300 h-24 transition-colors cursor-pointer rounded-[5px] shadow-none">
-            <CiCirclePlus className="text-5xl text-gray-300 group-hover:text-customBlackHover transition-colors" />
+          <div className="group flex items-center justify-center hover:border-customBlackHover border-dashed border-2 border-gray-300 h-12 md:h-24 transition-colors cursor-pointer rounded-[5px] shadow-none">
+            <CiCirclePlus className="text-2xl md:text-5xl text-gray-300 group-hover:text-customBlackHover transition-colors" />
           </div>
         </DialogTrigger>
         <DialogContent className="bg-white">
