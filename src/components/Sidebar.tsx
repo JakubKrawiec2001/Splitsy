@@ -1,6 +1,6 @@
 import { navLinks } from "@/constansts";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/icons/logo-splitsy.png";
+import logo from "/icons/logo-splitsy.png";
 import { RxExit } from "react-icons/rx";
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
