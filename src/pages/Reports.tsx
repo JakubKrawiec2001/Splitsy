@@ -60,8 +60,8 @@ const Reports = () => {
   );
 
   return (
-    <Card className="bg-white rounded-[5px] p-6">
-      <div className="flex items-center justify-between">
+    <Card className="bg-white rounded-[5px] md:p-6">
+      <div className="flex flex-col md:flex-row items-center justify-between">
         <CardHeader>
           <CardTitle>Your all expenses based on categories</CardTitle>
           <CardDescription>
@@ -72,12 +72,12 @@ const Reports = () => {
             </span>
           </CardDescription>
         </CardHeader>
-        <div className="flex gap-4">
+        <div className="flex gap-2 md:gap-4">
           <Select
             defaultValue="expenses"
             onValueChange={(value) => setTransactionType(value)}
           >
-            <SelectTrigger className="w-[180px] bg-customBlack text-white font-semibold hover:bg-customBlackHover transition-colors">
+            <SelectTrigger className="w-[120px] md:w-[180px] bg-customBlack text-white font-semibold hover:bg-customBlackHover transition-colors">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -89,7 +89,7 @@ const Reports = () => {
             defaultValue="bar"
             onValueChange={(value) => setChartType(value)}
           >
-            <SelectTrigger className="w-[180px] bg-customCyan text-customBlack font-semibold hover:bg-customBlackHover transition-colors">
+            <SelectTrigger className="w-[120px] md:w-[180px] bg-customCyan text-customBlack font-semibold hover:bg-customBlackHover transition-colors">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -99,7 +99,7 @@ const Reports = () => {
           </Select>
         </div>
       </div>
-      <CardContent className="mt-8">
+      <CardContent className="mt-8 p-0 pr-4 pb-4">
         {!isExpensesLoading || !isRevenuesLoading ? (
           chartType === "bar" ? (
             <TransactionsBarChart
@@ -116,7 +116,6 @@ const Reports = () => {
           <Loader2 size={60} className="animate-spin text-customCyan" />
         )}
       </CardContent>
-      <CardContent></CardContent>
     </Card>
   );
 };

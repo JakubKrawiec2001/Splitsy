@@ -25,7 +25,7 @@ const TransactionsBarChart = ({ chartData, chartConfig }: PropsType) => {
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-auto lg:h-[320px] 2xl:h-[300px] w-full"
+      className="aspect-auto h-[250px] lg:h-[320px] 2xl:h-[300px] w-full"
     >
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />

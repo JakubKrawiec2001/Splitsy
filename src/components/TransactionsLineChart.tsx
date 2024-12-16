@@ -16,7 +16,7 @@ const TransactionsLineChart = ({ chartData, chartConfig }: PropsType) => {
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-auto lg:h-[320px] 2xl:h-[300px] w-full"
+      className="aspect-auto h-[250px] lg:h-[320px] 2xl:h-[300px] w-full"
     >
       <LineChart accessibilityLayer data={chartData} margin={{ top: 35 }}>
         <CartesianGrid vertical={false} />
@@ -55,7 +55,7 @@ const TransactionsLineChart = ({ chartData, chartConfig }: PropsType) => {
         <ChartLegend
           content={() => {
             return (
-              <div className="flex flex-wrap gap-8 justify-center mt-12">
+              <div className="hidden md:flex flex-wrap gap-8 justify-center mt-12">
                 {chartData.map((item, index) => (
                   <div
                     key={`legend-item-${index}`}
