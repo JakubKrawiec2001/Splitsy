@@ -91,8 +91,8 @@ const Auth = ({ type }: { type: string }) => {
     }
   };
   const handleGuestLogin = async () => {
-    form.setValue("email", "guest@example.com");
-    form.setValue("password", "guestpassword");
+    form.setValue("email", "guest@splitsy.pl");
+    form.setValue("password", "Admin2024");
     await onSubmit(form.getValues());
   };
   return (
