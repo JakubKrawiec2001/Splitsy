@@ -1,7 +1,7 @@
 
 # Splitsy - Application for managing your home budget
 
-In the process of developing
+Check the published version of the application (splitsy-app.vercel.app) => [Live Demo](https://moviecine-app.vercel.app/)  
 
 <img src="./src/assets/readme-images/1.jpg"  >
 
