@@ -105,7 +105,7 @@ const DataTable = <TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex flex-col md:flex-row md:items-center py-4">
         <Input
           placeholder="Filter categories..."
           value={
@@ -116,7 +116,7 @@ const DataTable = <TData, TValue>({
           }
           className="max-w-sm bg-white"
         />
-        <div className="flex items-center gap-4 ml-6 h-12">
+        <div className="flex items-center gap-4 mt-4 md:mt-0 md:ml-6 h-12">
           <Select
             defaultValue="expenses"
             onValueChange={(value) => setTransactions(value)}
@@ -147,7 +147,7 @@ const DataTable = <TData, TValue>({
           </Button>
         </div>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger asChild className="hidden lg:flex">
             <Button
               variant="outline"
               className="ml-auto bg-customBlack text-white hover:bg-customBlackHover transition-colors"
@@ -183,7 +183,10 @@ const DataTable = <TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="pl-12 first:pl-0 md:pl-0"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -208,7 +211,10 @@ const DataTable = <TData, TValue>({
                     className={`${row}`}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                      <TableCell
+                        key={cell.id}
+                        className="pl-12 first:pl-0 md:pl-0"
+                      >
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
