@@ -6,6 +6,7 @@ import { UserProvider } from "./context/UserContext.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TransactionProvider } from "./context/TransactionContext.tsx";
 
+
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
