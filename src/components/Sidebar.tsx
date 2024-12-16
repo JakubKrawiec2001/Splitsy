@@ -16,7 +16,7 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className="hidden basis-1/6 bg-white p-6 lg:flex flex-col justify-between">
+    <div className="hidden basis-1/6 bg-white p-6 2lg:flex flex-col justify-between">
       <div className="flex flex-col gap-12">
         <div className="flex items-center gap-1">
           <img src={logo} alt="Splitsy" className="w-[50px]" />

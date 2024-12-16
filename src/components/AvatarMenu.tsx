@@ -7,9 +7,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { IoIosSettings, IoIosCard } from "react-icons/io";
-import { FaUserGroup } from "react-icons/fa6";
-import { FaWallet } from "react-icons/fa";
+import { IoIosCard } from "react-icons/io";
+import { MdSavings } from "react-icons/md";
+import { MdAnalytics } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const AvatarMenu = ({ userAvatar }: { userAvatar: string }) => {
   return (
@@ -23,20 +24,22 @@ const AvatarMenu = ({ userAvatar }: { userAvatar: string }) => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <IoIosCard />
-          Transactions
+          <Link to="/transactions" className="flex items-center gap-2 w-full">
+            <IoIosCard className="text-lg" />
+            Transactions
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <FaUserGroup />
-          Groups
+          <Link to="/savings" className="flex items-center gap-2 w-full">
+            <MdSavings className="text-lg" />
+            Savings
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <FaWallet />
-          Manage wallets
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <IoIosSettings />
-          Account settings
+          <Link to="/reports" className="flex items-center gap-2 w-full">
+            <MdAnalytics className="text-lg" />
+            Reports
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

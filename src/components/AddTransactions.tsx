@@ -29,6 +29,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useAddRevenues } from "@/hooks/useAddRevenues";
 import { serverTimestamp } from "firebase/firestore";
+import { useTruncate } from "@/hooks/useTruncate";
 
 const AddTransactions = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
@@ -36,6 +37,7 @@ const AddTransactions = () => {
   const { toast } = useToast();
   const addExpense = useAddExpenses(userData?.id);
   const addRevenue = useAddRevenues(userData?.id);
+  const { truncateText } = useTruncate(600, 6);
 
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
@@ -224,7 +226,7 @@ const AddTransactions = () => {
                                         : "text-customBlack"
                                     }`}
                                   >
-                                    {category.label}
+                                    {truncateText(category.label)}
                                   </p>
                                 </div>
                               );

@@ -6,7 +6,7 @@ import AvatarMenu from "./AvatarMenu";
 const Nav = () => {
   const { userData } = useUser();
   return (
-    <nav className="hidden md:flex justify-between items-center">
+    <nav className="hidden lg:flex justify-between items-center">
       <div className="hidden md:flex flex-col">
         <p className="text-customBlack font-semibold text-2xl">
           Let's manage your finance

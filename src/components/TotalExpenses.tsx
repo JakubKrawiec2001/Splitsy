@@ -1,16 +1,8 @@
 import { TbArrowDownFromArc } from "react-icons/tb";
-import { Loader2, TrendingUp } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -41,7 +33,7 @@ const TotalExpenses = ({
   };
 
   return (
-    <div className="bg-white shadow-sm rounded-[5px] flex items-center justify-between gap-4 p-6 2xl:px-8 2xl:py-2 col-start-1 col-end-3 row-start-1 row-end-2">
+    <div className="bg-white shadow-sm rounded-[5px] hidden md:flex items-center justify-between gap-4 p-6 2xl:px-8 2xl:py-2 col-start-1 col-end-3 row-start-1 row-end-2">
       <div className="flex flex-col justify-center gap-1">
         <TbArrowDownFromArc className="bg-gradient-to-r from-customBlackHover to-customBlack rounded-[5px] p-2 text-4xl text-customCyan" />
         <p className="text-customTextColor font-medium text-base xl:text-sm mt-2">

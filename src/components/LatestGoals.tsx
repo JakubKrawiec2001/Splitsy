@@ -20,7 +20,7 @@ const LatestGoals = ({ balance }: { balance: number }) => {
   const calculateProgress = (goalAmount: number) =>
     Math.min((balance / goalAmount) * 100, 100);
   return (
-    <div className="bg-white p-6 w-[60%] relative">
+    <div className="bg-white p-6 md:w-[60%] relative 2lg:hidden xl:block">
       <div className="flex flex-col">
         <p className="text-customBlack font-semibold">Your latest goals</p>
         <p className="text-customTextColor text-sm">
@@ -58,7 +58,7 @@ const LatestGoals = ({ balance }: { balance: number }) => {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <FaInfoCircle className="text-gray-300 hover:text-gray-400 transition-colors" />
+                          <FaInfoCircle className="text-gray-300 hover:text-gray-400 transition-colors hidden 2lg:block" />
                         </TooltipTrigger>
                         <TooltipContent className="bg-white shadow-md rounded-[5px] text-customTextColor w-[50%]">
                           <p>

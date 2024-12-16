@@ -37,7 +37,7 @@ const ExpensesTable = ({ expenses, isExpensesLoading }: PropsType) => {
                     </p>
                   </div>
                 </TableCell>
-                <TableCell className="text-right text-customBlack text-base font-semibold 2lg:pr-4 xl:pr-8">
+                <TableCell className="text-right text-customBlack text-base font-semibold lg:pr-5 2lg:pr-4 xl:pr-8">
                   ${expense.amount}
                 </TableCell>
               </TableRow>

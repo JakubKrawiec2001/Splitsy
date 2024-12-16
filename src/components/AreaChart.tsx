@@ -67,7 +67,7 @@ const AreaChart = ({ revenues, expenses }: PropsType) => {
     },
   } satisfies ChartConfig;
   return (
-    <div className="bg-white col-start-1 col-end-5 row-start-4 row-end-5 py-4">
+    <div className="bg-white col-start-1 md:col-end-7 lg:col-end-5 row-start-4 row-end-5 py-4 hidden md:block">
       <Card>
         <CardHeader className="flex items-center gap-2 space-y-0 py-5 sm:flex-row">
           <div className="grid flex-1 gap-1 text-center sm:text-left">

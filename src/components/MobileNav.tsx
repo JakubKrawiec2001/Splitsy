@@ -17,16 +17,17 @@ import {
 } from "@/components/ui/sheet";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { IoIosSettings, IoIosCard } from "react-icons/io";
+import { IoIosCard } from "react-icons/io";
 import { RxExit } from "react-icons/rx";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { FaUserGroup } from "react-icons/fa6";
-import { FaWallet } from "react-icons/fa";
+import { MdSavings } from "react-icons/md";
+import { MdAnalytics } from "react-icons/md";
 import { useUser } from "@/hooks/useUser";
 import { navLinks } from "@/constansts";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import AddTransactions from "./AddTransactions";
 
 const MobileNav = () => {
   const { userData } = useUser();
@@ -38,35 +39,43 @@ const MobileNav = () => {
     }
   };
   return (
-    <nav className="flex md:hidden justify-between items-center">
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Avatar>
-            <AvatarImage src={userData?.avatar} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent side="bottom" align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <IoIosCard />
-            Transactions
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <FaUserGroup />
-            Groups
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <FaWallet />
-            Manage wallets
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <IoIosSettings />
-            Account settings
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+    <nav className="flex lg:hidden justify-between items-center">
+      <div className="flex items-center gap-6">
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar>
+              <AvatarImage src={userData?.avatar} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side="bottom" align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link
+                to="/transactions"
+                className="flex items-center gap-2 w-full"
+              >
+                <IoIosCard className="text-lg" />
+                Transactions
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link to="/savings" className="flex items-center gap-2 w-full">
+                <MdSavings className="text-lg" />
+                Savings
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link to="/reports" className="flex items-center gap-2 w-full">
+                <MdAnalytics className="text-lg" />
+                Reports
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <AddTransactions />
+      </div>
       <Sheet>
         <SheetTrigger>
           <HiMenuAlt3 className="text-4xl text-customBlack" />

@@ -14,7 +14,7 @@ const Balance = ({
   isRevenuesLoading,
 }: PropsType) => {
   return (
-    <div className="bg-customBlack shadow-sm rounded-[5px] flex items-center justify-between gap-4 p-6 2xl:px-8 2xl:py-2 col-start-5 col-end-7 row-start-1 row-end-2 relative overflow-hidden">
+    <div className="bg-customBlack shadow-sm rounded-[5px] flex items-center justify-between gap-4 p-4 md:p-6 2xl:px-8 2xl:py-2 col-start-1 md:col-start-5 col-end-7 row-start-1 row-end-2 relative overflow-hidden">
       <div className="flex flex-col justify-center gap-1">
         <FaWallet className="bg-white rounded-[5px] p-2 text-4xl text-customBlack" />
         <p className="text-customLightGray font-medium text-base xl:text-sm mt-2">
@@ -23,7 +23,7 @@ const Balance = ({
         {isExpensesLoading || isRevenuesLoading ? (
           <Loader2 size={60} className="animate-spin text-customCyan" />
         ) : (
-          <p className="text-4xl xl:text-2xl 2xl:text-3xl text-white font-medium">
+          <p className="text-3xl md:text-4xl xl:text-2xl 2xl:text-3xl text-white font-medium">
             ${balance.toFixed(2)}
           </p>
         )}

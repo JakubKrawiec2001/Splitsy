@@ -46,7 +46,7 @@ const Home = () => {
         isExpensesLoading={isExpensesLoading}
         isRevenuesLoading={isRevenuesLoading}
       />
-      <div className="col-start-1 col-end-5 row-start-2 row-end-4 flex gap-4">
+      <div className="col-start-1 col-end-7 lg:col-end-5 row-start-2 row-end-4 flex flex-col md:flex-row gap-4">
         <PieChart expenses={expenses} totalExpenses={totalExpenses} />
         <LatestGoals balance={balance} />
       </div>
