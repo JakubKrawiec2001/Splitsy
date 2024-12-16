@@ -20,7 +20,7 @@ const LatestGoals = ({ balance }: { balance: number }) => {
   const calculateProgress = (goalAmount: number) =>
     Math.min((balance / goalAmount) * 100, 100);
   return (
-    <div className="bg-white p-6 w-[60%]">
+    <div className="bg-white p-6 w-[60%] relative">
       <div className="flex flex-col">
         <p className="text-customBlack font-semibold">Your latest goals</p>
         <p className="text-customTextColor text-sm">
@@ -34,7 +34,7 @@ const LatestGoals = ({ balance }: { balance: number }) => {
         </p>
       </div>
       {goals?.length === 0 && (
-        <p className="text-customTextColor text-center">
+        <p className="text-customTextColor text-center absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
           You don't have planned achievement goals.{" "}
           <Link
             to="/savings"

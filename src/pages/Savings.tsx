@@ -12,6 +12,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { FaInfoCircle } from "react-icons/fa";
+import { useDeleteGoal } from "@/hooks/useDeleteGoal";
+import { useToast } from "@/hooks/use-toast";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Savings = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
@@ -20,9 +23,26 @@ const Savings = () => {
     userData?.id
   );
   const { balance } = useContext(TransactionContext);
+  const deleteGoal = useDeleteGoal(userData?.id);
+  const { toast } = useToast();
 
   const calculateProgress = (goalAmount: number) =>
     Math.min((balance / goalAmount) * 100, 100);
+
+  const handleDeleteGoal = (goalId: string) => {
+    deleteGoal.mutate(
+      { goalId },
+      {
+        onSuccess: () => {
+          toast({
+            variant: "default",
+            title: "Success",
+            description: "Successfully deleted goal",
+          });
+        },
+      }
+    );
+  };
 
   return (
     <>
@@ -51,7 +71,18 @@ const Savings = () => {
           goals?.map((goal) => {
             const progress = calculateProgress(goal.goal);
             return (
-              <div key={goal.id} className="bg-white rounded-[5px] p-10">
+              <div
+                key={goal.id}
+                className="bg-white rounded-[5px] p-10 relative"
+              >
+                {deleteGoal.isPending ? (
+                  <Loader2 size={30} className="animate-spin text-[#FF2F55]" />
+                ) : (
+                  <FaTrashAlt
+                    className="absolute top-4 right-4 text-lg text-[#FF2F55] hover:text-[#ff2f55c2] transition-colors cursor-pointer"
+                    onClick={() => handleDeleteGoal(goal.id!)}
+                  />
+                )}
                 <div className="flex justify-between gap-4">
                   <div className="flex flex-col">
                     <p className="text-customTextColor">Goal of saving</p>
