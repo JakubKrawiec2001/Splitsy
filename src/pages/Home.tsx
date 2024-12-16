@@ -1,5 +1,6 @@
 import AreaChart from "@/components/AreaChart";
 import Balance from "@/components/Balance";
+import LatestGoals from "@/components/LatestGoals";
 import PieChart from "@/components/PieChart";
 import TotalExpenses from "@/components/TotalExpenses";
 import TotalRevenues from "@/components/TotalRevenues";
@@ -45,7 +46,10 @@ const Home = () => {
         isExpensesLoading={isExpensesLoading}
         isRevenuesLoading={isRevenuesLoading}
       />
-      <PieChart expenses={expenses} totalExpenses={totalExpenses} />
+      <div className="col-start-1 col-end-5 row-start-2 row-end-4 flex gap-4">
+        <PieChart expenses={expenses} totalExpenses={totalExpenses} />
+        <LatestGoals balance={balance} />
+      </div>
       <TransactionTabs />
       <AreaChart expenses={expenses} revenues={revenues} />
     </div>
