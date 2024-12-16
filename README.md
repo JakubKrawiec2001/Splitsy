@@ -1,11 +1,11 @@
 
 # Splitsy - Application for managing your home budget
 
-Check the published version of the application (splitsy-app.vercel.app) => [Live Demo](https://moviecine-app.vercel.app/)  
+🚀 Check the published version of the application (splitsy-app.vercel.app) => [Live Demo](https://moviecine-app.vercel.app/)  
 
 <img src="./src/assets/readme-images/1.jpg"  >
 
-## Introduction
+## 🤖 Introduction
 
 Splitsy is a modern and responsive web application designed to monitor and manage your household budget, allowing you to effectively track expenses, income and savings. Thanks to its intuitive interface and the use of modern technologies, Splitsy allows you to control your finances in a simple and transparent way.
 
@@ -23,7 +23,7 @@ Create and monitor financial goals (e.g., for vacations, birthdays), with visual
 
 
 
-<p>Tech Stack:</p>
+<p>⚙️ Tech Stack:</p>
 <ul>
   <li>React.js</li>
   <li>Typescript</li>
@@ -38,7 +38,7 @@ Create and monitor financial goals (e.g., for vacations, birthdays), with visual
 
 <br />
 
-## Mockup
+## 🎨 Mockup
 
 <br />
 <img src="./src/assets/readme-images/8.jpg"  >
