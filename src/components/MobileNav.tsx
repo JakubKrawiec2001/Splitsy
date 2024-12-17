@@ -24,13 +24,14 @@ import { MdSavings } from "react-icons/md";
 import { MdAnalytics } from "react-icons/md";
 import { useUser } from "@/hooks/useUser";
 import { navLinks } from "@/constansts";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import AddTransactions from "./AddTransactions";
 
 const MobileNav = () => {
   const { userData } = useUser();
+  const location = useLocation();
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -91,9 +92,10 @@ const MobileNav = () => {
               {navLinks.map((navLink) => {
                 const IconComponent = navLink.icon;
                 return (
-                  <SheetClose asChild key={navLink.id}>
+                  <SheetClose asChild>
                     <Link
                       to={navLink.path}
+                      key={navLink.id}
                       className={`flex items-center gap-4 font-medium text-base px-4 py-3 rounded-[5px] mb-2 ${
                         location.pathname === navLink.path
                           ? "bg-customCyan border-r-[6px] border-customBlack text-customBlack"
