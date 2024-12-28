@@ -27,7 +27,7 @@ Create and monitor financial goals (e.g., for vacations, birthdays), with visual
 <ul>
   <li>React.js</li>
   <li>Typescript</li>
-  <li>TenStack (React) Query</li>
+  <li>TanStack (React) Query</li>
   <li>Firebase</li>
   <li>TailwindCSS</li>
   <li>ShadCN</li>
